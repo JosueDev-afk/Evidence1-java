@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!-- Configuración de la aplicación -->
+    <display-name>Calculadora IAC - Índice de Adiposidad Corporal</display-name>
+    <description>
+        Aplicación web para calcular el Índice de Adiposidad Corporal (IAC) 
+        utilizando Java Servlets, JSP, JDBC y MySQL siguiendo el patrón MVC.
+    </description>
+
+    <!-- Página de bienvenida -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Configuración de sesión -->
+    <session-config>
+        <session-timeout>30</session-timeout> <!-- 30 minutos -->
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure> <!-- Cambiar a true en producción con HTTPS -->
+        </cookie-config>
+    </session-config>
+
+    <!-- Servlet para cálculo de IAC -->
+    <servlet>
+        <servlet-name>CalculateIACServlet</servlet-name>
+        <servlet-class>org.example.evidence1.servlet.CalculateIACServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CalculateIACServlet</servlet-name>
+        <url-pattern>/calculate</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet para gestión de usuarios -->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>org.example.evidence1.servlet.UserServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet para historial de cálculos -->
+    <servlet>
+        <servlet-name>HistoryServlet</servlet-name>
+        <servlet-class>org.example.evidence1.servlet.HistoryServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HistoryServlet</servlet-name>
+        <url-pattern>/history</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuración de parámetros de contexto -->
+    <context-param>
+        <param-name>db.url</param-name>
+        <param-value>jdbc:mysql://localhost:3306/iac_app</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.username</param-name>
+        <param-value>iac_user</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.password</param-name>
+        <param-value>pass123</param-value>
+    </context-param>
+    <context-param>
+        <param-name>db.driver</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+
+    <!-- Configuración de filtros para encoding UTF-8 -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.example.evidence1.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Configuración de manejo de errores -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error/general.jsp</location>
+    </error-page>
+
+    <!-- Configuración de recursos estáticos -->
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.gif</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.ico</url-pattern>
+    </servlet-mapping>
+
+    <!-- Configuración de seguridad básica -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/WEB-INF/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <!-- Sin roles definidos = acceso denegado -->
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Configuración de compresión GZIP (si el servidor lo soporta) -->
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>js</extension>
+        <mime-type>application/javascript</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>json</extension>
+        <mime-type>application/json</mime-type>
+    </mime-mapping>
+
+</web-app>
