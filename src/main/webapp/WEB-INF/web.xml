@@ -25,38 +25,25 @@
         </cookie-config>
     </session-config>
 
-    <!-- Servlet para cálculo de IAC -->
+    <!-- Spring MVC DispatcherServlet -->
     <servlet>
-        <servlet-name>CalculateIACServlet</servlet-name>
-        <servlet-class>org.example.evidence1.servlet.CalculateIACServlet</servlet-class>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-mvc.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CalculateIACServlet</servlet-name>
-        <url-pattern>/calculate</url-pattern>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- Servlet para gestión de usuarios -->
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>org.example.evidence1.servlet.UserServlet</servlet-class>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
+    <!-- Eliminado: mapeo explícito de UserServlet para evitar conflicto con @WebServlet("/user") -->
 
-    <!-- Servlet para historial de cálculos -->
-    <servlet>
-        <servlet-name>HistoryServlet</servlet-name>
-        <servlet-class>org.example.evidence1.servlet.HistoryServlet</servlet-class>
-        <load-on-startup>3</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HistoryServlet</servlet-name>
-        <url-pattern>/history</url-pattern>
-    </servlet-mapping>
+    <!-- Nota: DispatcherServlet ya carga /WEB-INF/spring-mvc.xml.
+         Se omite ContextLoaderListener para evitar duplicar contextos. -->
 
     <!-- Configuración de parámetros de contexto -->
     <context-param>
@@ -92,6 +79,16 @@
     <filter-mapping>
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Filtro de validación de entrada para cálculo IAC -->
+    <filter>
+        <filter-name>IACInputValidationFilter</filter-name>
+        <filter-class>org.example.evidence1.filter.IACInputValidationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IACInputValidationFilter</filter-name>
+        <url-pattern>/calculate</url-pattern>
     </filter-mapping>
 
     <!-- Configuración de manejo de errores -->

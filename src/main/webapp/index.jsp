@@ -259,11 +259,11 @@
             </div>
             
             <div class="action-buttons">
-                <a href="${pageContext.request.contextPath}/calculator.jsp" class="btn btn-primary">
+                <a href="${pageContext.request.contextPath}/calculator" class="btn btn-primary">
                     🧮 Calcular mi IAC
                 </a>
                 
-                <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-secondary">
+                <a href="${pageContext.request.contextPath}/user" class="btn btn-secondary">
                     👤 Registrarse
                 </a>
                 

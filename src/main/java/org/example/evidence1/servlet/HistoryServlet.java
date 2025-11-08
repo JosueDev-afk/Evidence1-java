@@ -117,7 +117,7 @@ public class HistoryServlet extends HttpServlet {
             request.setAttribute("error", "No se encontró información del usuario. Por favor, inicie sesión o registrese.");
         }
         
-        request.getRequestDispatcher("/history.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/history.jsp").forward(request, response);
     }
     
     /**
@@ -139,7 +139,7 @@ public class HistoryServlet extends HttpServlet {
             }
         }
         
-        request.getRequestDispatcher("/history.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/history.jsp").forward(request, response);
     }
     
     /**
@@ -183,7 +183,7 @@ public class HistoryServlet extends HttpServlet {
             request.setAttribute("error", "Usuario '" + userName + "' no encontrado.");
         }
         
-        request.getRequestDispatcher("/history.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/history.jsp").forward(request, response);
     }
     
     /**

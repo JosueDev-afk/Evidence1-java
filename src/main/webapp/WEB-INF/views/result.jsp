@@ -430,7 +430,7 @@
                     📊 Ver mi Historial
                 </a>
                 
-                <a href="${pageContext.request.contextPath}/register.jsp" class="btn btn-info">
+                <a href="${pageContext.request.contextPath}/user" class="btn btn-info">
                     👤 Actualizar Perfil
                 </a>
                 
