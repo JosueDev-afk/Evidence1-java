@@ -486,7 +486,7 @@
                     <p>No hay cálculos de IAC registrados con los criterios especificados.</p>
                     <p>¡Realiza tu primer cálculo para comenzar a ver tu historial!</p>
                     <br>
-                    <a href="${pageContext.request.contextPath}/calculator.jsp" class="btn btn-primary">🧮 Calcular IAC</a>
+                    <a href="${pageContext.request.contextPath}/calculator" class="btn btn-primary">🧮 Calcular IAC</a>
                 </div>
             </c:if>
             
@@ -501,8 +501,8 @@
         
         <div class="navigation">
             <a href="${pageContext.request.contextPath}/index.jsp">← Volver al Inicio</a>
-            <a href="${pageContext.request.contextPath}/calculator.jsp">Calcular IAC</a>
-            <a href="${pageContext.request.contextPath}/register.jsp">Registrarse</a>
+            <a href="${pageContext.request.contextPath}/calculator">Calcular IAC</a>
+            <a href="${pageContext.request.contextPath}/user">Registrarse</a>
         </div>
     </div>
     

@@ -278,7 +278,7 @@
         
         <div class="navigation">
             <a href="${pageContext.request.contextPath}/index.jsp">← Volver al Inicio</a>
-            <a href="${pageContext.request.contextPath}/register.jsp">Registrarse</a>
+            <a href="${pageContext.request.contextPath}/user">Registrarse</a>
             <a href="${pageContext.request.contextPath}/history">Ver Historial</a>
         </div>
     </div>

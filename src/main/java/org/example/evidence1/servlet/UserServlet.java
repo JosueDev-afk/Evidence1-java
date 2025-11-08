@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Servlet para manejar operaciones relacionadas con usuarios
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/user"})
+@WebServlet(name = "UserServlet", urlPatterns = {"/user-legacy"})
 public class UserServlet extends HttpServlet {
     
     private UserDAO userDAO;
@@ -87,7 +87,7 @@ public class UserServlet extends HttpServlet {
      */
     private void showRegisterForm(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
     }
     
     /**
@@ -111,14 +111,14 @@ public class UserServlet extends HttpServlet {
                 estaturaStr == null || estaturaStr.trim().isEmpty()) {
                 
                 request.setAttribute("error", "Todos los campos son obligatorios excepto el peso.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
             // Verificar si el usuario ya existe
             if (userDAO.findByName(nombre.trim()) != null) {
                 request.setAttribute("error", "Ya existe un usuario con ese nombre.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
@@ -137,26 +137,26 @@ public class UserServlet extends HttpServlet {
                 
             } catch (NumberFormatException e) {
                 request.setAttribute("error", "Por favor, ingrese valores numéricos válidos.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
             // Validar rangos
             if (edad < 1 || edad > 120) {
                 request.setAttribute("error", "La edad debe estar entre 1 y 120 años.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
             if (estatura <= 0 || estatura > 3.0) {
                 request.setAttribute("error", "La estatura debe estar entre 0.1 y 3.0 metros.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
             if (peso != null && (peso <= 0 || peso > 500)) {
                 request.setAttribute("error", "El peso debe estar entre 1 y 500 kg.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
@@ -173,10 +173,10 @@ public class UserServlet extends HttpServlet {
                 
                 request.setAttribute("success", "Usuario registrado exitosamente.");
                 request.setAttribute("user", user);
-                request.getRequestDispatcher("/calculator.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/calculator.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "Error al registrar el usuario.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             }
             
         } catch (Exception e) {
@@ -184,7 +184,7 @@ public class UserServlet extends HttpServlet {
             e.printStackTrace();
             
             request.setAttribute("error", "Error interno del servidor.");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
         }
     }
     
@@ -199,7 +199,7 @@ public class UserServlet extends HttpServlet {
             
             if (userIdStr == null || userIdStr.trim().isEmpty()) {
                 request.setAttribute("error", "ID de usuario requerido.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
@@ -208,7 +208,7 @@ public class UserServlet extends HttpServlet {
             
             if (existingUser == null) {
                 request.setAttribute("error", "Usuario no encontrado.");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
                 return;
             }
             
@@ -264,14 +264,14 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("error", "Error al actualizar el usuario.");
             }
             
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
             
         } catch (Exception e) {
             System.err.println("Error en updateUser: " + e.getMessage());
             e.printStackTrace();
             
             request.setAttribute("error", "Error interno del servidor.");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
         }
     }
     
